@@ -1,19 +1,24 @@
-import Link from "next/link";
+import Link from "next/link"
 
-export default function Home() {
+interface TagPageProps {
+  params: {
+    tagId: string
+  }
+}
+
+export default async function Tag({
+  params
+}: TagPageProps) {  
   return (
     <div className="relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32 bg-slate-100 rounded-b-[40px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-20 bg-slate-100 rounded-b-[40px]">
         <h1 className="mx-auto max-w-7xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
-          BibleTag - Exploring the Scriptures: Insights and Reflections
+          {params.tagId}
         </h1>
-        <p className="mx-auto mt-8 max-w-2xl text-lg tracking-tight text-slate-700">
-          Search articles by a tag topic such as relationships, attributes of God, Jesus, The Church, etc.
-        </p>
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 text-center">
         <h3 className="mx-auto max-w-7xl font-display text-4xl font-medium tracking-tight text-slate-900">
-          Featured articles
+          Related articles
         </h3>
         <div className="mx-auto max-w-7xl py-16">
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -134,5 +139,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  );
-}
+  )
+} 

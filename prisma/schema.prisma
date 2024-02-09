@@ -11,24 +11,24 @@ model Article {
   id         Int                    @id @default(autoincrement())
   title      String
   slug       String
-  categories CategoriesOnArticles[]
+  tags TagsOnArticles[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt()
 }
 
-model Category {
+model Tag {
   id       Int                    @id @default(autoincrement())
   slug     String
   name     String
-  articles CategoriesOnArticles[]
+  articles TagsOnArticles[]
 }
 
-model CategoriesOnArticles {
+model TagsOnArticles {
   article    Article  @relation(fields: [articleId], references: [id])
   articleId  Int // relation scalar field (used in the `@relation` attribute above)
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int // relation scalar field (used in the `@relation` attribute above)
+  tag   Tag @relation(fields: [tagId], references: [id])
+  tagId Int // relation scalar field (used in the `@relation` attribute above)
   assignedAt DateTime @default(now())
 
-  @@id([articleId, categoryId])
+  @@id([articleId, tagId])
 }
