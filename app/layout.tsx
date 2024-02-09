@@ -3,7 +3,7 @@ import { Lexend } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/shared/navbar/navbar";
 
-const font = Lexend();
+const font = Lexend({subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "BibleTag - Exploring the Scriptures",
