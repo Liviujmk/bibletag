@@ -8,27 +8,30 @@ generator client {
 }
 
 model Article {
-  id         Int                    @id @default(autoincrement())
-  title      String
-  slug       String
-  tags TagsOnArticles[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt()
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt()
+  body        String
+  content     String?
+  tags        TagsOnPosts[]
 }
 
 model Tag {
-  id       Int                    @id @default(autoincrement())
-  slug     String
-  name     String
-  articles TagsOnArticles[]
+  id          Int          @id @default(autoincrement())
+  slug        String
+  name        String
+  articles    TagsOnPosts[]
 }
 
-model TagsOnArticles {
-  article    Article  @relation(fields: [articleId], references: [id])
-  articleId  Int // relation scalar field (used in the `@relation` attribute above)
-  tag   Tag @relation(fields: [tagId], references: [id])
-  tagId Int // relation scalar field (used in the `@relation` attribute above)
-  assignedAt DateTime @default(now())
-
+model TagsOnPosts {
+  article     Article     @relation(fields: [articleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  articleId   Int
+  tag         Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tagId       Int
+  createdAt   DateTime    @default(now())
+  
   @@id([articleId, tagId])
 }
+

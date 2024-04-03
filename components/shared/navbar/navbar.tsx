@@ -1,6 +1,8 @@
 "use client"
 
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
 
 export const Navbar = () => {
   return (
@@ -16,7 +18,7 @@ export const Navbar = () => {
           </div>
           <div className=" flex items-center gap-5">
             <nav className="relative z-10 flex-1 items-center justify-center hidden pl-8 sm:space-x-4 lg:flex h-16">
-              <ul className="group flex flex-1 list-none items-center justify-center space-x-1">
+              <ul className="group flex flex-1 list-none items-center justify-center">
                 <li className="font-medium">
                   <Link href="/" className="group/menu-item flex items-center text-md hover:text-blue-600 select-none gap-3 rounded-md p-2 leading-none no-underline outline-none focus-visible:ring-2 focus-visible:ring-foreground-lighter group-hover:bg-transparent text-foreground focus-visible:text-brand-link transition-all duration-200">Home</Link>
                 </li>
@@ -26,9 +28,17 @@ export const Navbar = () => {
                 <li className="font-medium">
                   <Link href="/tags" className="group/menu-item flex items-center text-md hover:text-blue-600 select-none gap-3 rounded-md p-2 leading-none no-underline outline-none focus-visible:ring-2 focus-visible:ring-foreground-lighter group-hover:bg-transparent text-foreground focus-visible:text-brand-link transition-all duration-200">Tags</Link>
                 </li>
+                <li className="ml-5 font-medium">
+                  <Link href="/articles/new">
+                    <Button className="py-4 pl-3 pr-4 rounded-lg">
+                      <Plus className="mr-1.5 w-5" />
+                      New article
+                    </Button>
+                  </Link>
+                </li>
               </ul>
             </nav>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
