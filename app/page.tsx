@@ -4,7 +4,7 @@ import prismadb from "@/lib/prisma";
 import { ArticlesList } from "@/app/articles/components/articles-list";
 
 export default async function Home() {
-  const articles = await prismadb.article.findMany()
+  const articles = await prismadb.article.findMany() as any
   
   if(!articles) return null
   return (

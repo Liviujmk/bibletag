@@ -5,7 +5,7 @@ import { Article, Tag } from "@prisma/client";
 import { ArticleCard } from "@/app/articles/components/article-card";
 
 interface Props {
-  articles?: (Article& {tags: Tag[]})[]
+  articles?:  (Article& {tags: Tag[]})[]
 }
 
 export const ArticlesList = ({articles}: Props) => {
