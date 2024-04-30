@@ -14,15 +14,17 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { toast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 import Tiptap from "@/app/articles/new/components/tiptap-editor"
+import TagsSelect from "@/app/articles/new/components/tags-select"
+import { create } from "@/app/create"
 
 const FormSchema = z.object({
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
   }),
-  content: z.string().min(1, {
-    message: "Content cannot be empty.",
+  body: z.string().min(1, {
+    message: "Body cannot be empty.",
   }),
   tags: z.string().array(),
 })
@@ -33,19 +35,20 @@ export default function NewArticlePage() {
     defaultValues: {
       title: "",
       tags: [],
-      content: "",
+      body: "",
     },
   })
+  
+  const { append, remove } = useFieldArray({
+    control: form.control,
+    name: 'tags' as never,
+  });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(form)
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast.promise(create(data), {
+      loading: 'Creating article',
+      success: 'Article created successfully',
+      error: 'Article could not be created'
     })
   }
 
@@ -69,10 +72,23 @@ export default function NewArticlePage() {
           />
           <FormField
             control={form.control}
-            name="content"
+            name="tags"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Content</FormLabel>
+                <FormLabel>Tags</FormLabel>
+                <FormControl>
+                  <TagsSelect tags={field.value} append={append} remove={remove} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="body"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Body</FormLabel>
                 <FormControl>
                   <Tiptap content={field.value} onChange={field.onChange} />
                 </FormControl>

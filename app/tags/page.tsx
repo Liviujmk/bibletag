@@ -1,6 +1,11 @@
-import Link from "next/link";
+import { Tag } from "@prisma/client";
+
+import prismadb from "@/lib/prisma";
+import TagCard from "./components/tag-card";
 
 export default async function Tags() {
+  const tags = await prismadb.tag.findMany()
+  if(!tags) return null
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32 bg-slate-100 rounded-b-[40px]">
@@ -14,66 +19,12 @@ export default async function Tags() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 text-center">
         <div className="mx-auto max-w-7xl py-16">
           <div className="flex flex-wrap gap-5 p-2 justify-center">
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
-            <span className="text-slate-500 font-light border px-3 py-1 rounded-3xl hover:bg-black transition-all duration-300 hover:text-white">
-              <Link href="/tags/viata"># Viață</Link>
-            </span>
+            {
+              tags.map((tag: Tag) => (<TagCard tag={tag} key={tag.id} />))
+            }
           </div>
         </div>
       </div>
     </>
   )
-} 
+}

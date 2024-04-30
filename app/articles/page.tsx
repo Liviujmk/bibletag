@@ -1,7 +1,12 @@
-import { ArticlesList } from "./components/articles-list";
+import prismadb from "@/lib/prisma";
+import { ArticlesList } from "@/app/articles/components/articles-list";
 
 
 export default async function Articles() {
+  const articles = await prismadb.article.findMany({ take: 15, include: {tags: true} })
+  
+  if(!articles) return null
+  
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32 bg-slate-100 rounded-b-[40px]">
@@ -12,7 +17,7 @@ export default async function Articles() {
           Search articles by a tag topic such as relationships, attributes of God, Jesus, The Church, etc.
         </p>
       </div>
-      <ArticlesList />
+      <ArticlesList articles={articles} />
     </>
   )
-} 
+}
