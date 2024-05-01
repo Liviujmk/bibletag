@@ -1,4 +1,5 @@
 import prismadb from "@/lib/prisma"
+import { notFound } from 'next/navigation'
 
 interface ArticlePageProps {
   params: {
@@ -16,6 +17,8 @@ export default async function Article({
       slug: params.slug
     }
   })
+  
+  if(!article) notFound()
   
   return (
     <div className="relative">

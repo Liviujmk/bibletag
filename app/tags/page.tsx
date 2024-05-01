@@ -3,6 +3,8 @@ import { Tag } from "@prisma/client";
 import prismadb from "@/lib/prisma";
 import TagCard from "./components/tag-card";
 
+export const revalidate = 0
+
 export default async function Tags() {
   const tags = await prismadb.tag.findMany()
   if(!tags) return null

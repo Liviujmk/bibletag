@@ -3,6 +3,8 @@ import prismadb from "@/lib/prisma";
 
 import { ArticlesList } from "@/app/articles/components/articles-list";
 
+export const revalidate = 0
+
 export default async function Home() {
   const articles = await prismadb.article.findMany() as any
   

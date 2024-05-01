@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { notFound } from 'next/navigation'
 
 import prismadb from "@/lib/prisma";
 import { ArticlesList } from "@/app/articles/components/articles-list";
@@ -14,6 +15,7 @@ export const revalidate = 0
 export default async function Tag({
   params
 }: TagPageProps) {  
+  const tag = await prismadb.tag.findUnique({where: {slug: params.slug}})
   const articles = await prismadb.article.findMany({ 
     where: {
       tags: {
@@ -27,7 +29,7 @@ export default async function Tag({
     include: {tags: true} 
   })
   
-  if(!articles) return null
+  if(!tag) notFound()
   
   return (
     <div className="relative">

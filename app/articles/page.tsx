@@ -1,6 +1,8 @@
 import prismadb from "@/lib/prisma";
 import { ArticlesList } from "@/app/articles/components/articles-list";
 
+export const revalidate = 0
+
 export default async function Articles() {
   const articles = await prismadb.article.findMany({ include: {tags: true} })
   
