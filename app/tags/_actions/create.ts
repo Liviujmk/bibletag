@@ -2,7 +2,7 @@
 
 import prismadb from "@/lib/prisma"
 import { slugify } from "@/lib/utils"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
  
 export async function createTag(data: any) {
@@ -16,5 +16,6 @@ export async function createTag(data: any) {
   })
   
   revalidatePath('/tags')
+  revalidateTag('tags')
   redirect('/tags')
 }

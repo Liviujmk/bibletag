@@ -11,5 +11,6 @@ export async function deleteArticle(id: string) {
   })
   
   revalidatePath('/articles')
+  revalidatePath('/')
   redirect('/articles')
 }

@@ -6,6 +6,8 @@ interface ArticlePageProps {
   }
 }
 
+export const revalidate = 0
+
 export default async function Article({
   params
 }: ArticlePageProps) {
@@ -14,7 +16,6 @@ export default async function Article({
       slug: params.slug
     }
   })
-
   
   return (
     <div className="relative">

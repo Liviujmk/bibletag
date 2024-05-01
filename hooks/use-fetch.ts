@@ -10,7 +10,7 @@ export const useFetch = <T>(url: string, method: string = 'GET'): [T | null, boo
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url, { method });
+        const response = await fetch(url, { method, next: { tags: ['tags'] } });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

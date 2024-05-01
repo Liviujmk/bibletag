@@ -9,6 +9,8 @@ interface TagPageProps {
   }
 }
 
+export const revalidate = 0
+
 export default async function Tag({
   params
 }: TagPageProps) {  

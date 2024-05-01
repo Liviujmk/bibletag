@@ -25,6 +25,7 @@ export async function create(data: any) {
     },
   })
   
+  revalidatePath('/')
   revalidatePath('/articles')
   redirect('/articles')
 }

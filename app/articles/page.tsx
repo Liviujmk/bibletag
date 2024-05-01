@@ -1,9 +1,8 @@
 import prismadb from "@/lib/prisma";
 import { ArticlesList } from "@/app/articles/components/articles-list";
 
-
 export default async function Articles() {
-  const articles = await prismadb.article.findMany({ take: 15, include: {tags: true} })
+  const articles = await prismadb.article.findMany({ include: {tags: true} })
   
   if(!articles) return null
   
