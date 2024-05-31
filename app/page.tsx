@@ -6,9 +6,15 @@ import { ArticlesList } from "@/app/articles/components/articles-list";
 export const revalidate = 0
 
 export default async function Home() {
-  const articles = await prismadb.article.findMany() as any
+  const articles = await prismadb.article.findMany({
+    include: {
+      tags: true
+    },
+    orderBy: {
+      updatedAt: 'asc'
+    }
+  })
   
-  if(!articles) return null
   return (
     <div className="relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32 bg-slate-100 rounded-b-[40px]">
@@ -24,8 +30,8 @@ export default async function Home() {
           Featured articles
         </h3>
         <ArticlesList articles={articles} />
-        <div className="mx-auto max-w-7xl font-display text-lg font-medium tracking-tight text-slate-900">
-          <span className="px-5 py-3 bg-blue-800 text-white rounded-md">
+        <div className="mx-auto mb-8 max-w-7xl font-display text-lg font-medium tracking-tight text-slate-900">
+          <span className="hover:rounded-full transition duration-500 ease-in-out px-5 py-3 bg-black text-white rounded-xl">
             <Link href="/articles">All articles</Link>
           </span>
         </div>

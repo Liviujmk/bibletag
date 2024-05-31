@@ -44,8 +44,6 @@ const TagsSelect = ({ tags, append, remove }: Props) => {
   };
   
   const [options] = useFetch<Tag[]>('/tags/api')
-  
-  if(!options) return null
 
   return (
     <div>
@@ -58,15 +56,15 @@ const TagsSelect = ({ tags, append, remove }: Props) => {
               <>
                 <Separator orientation="vertical" className="mx-2 h-4" />
                 <Badge
-                  variant="secondary"
+                  variant="outline"
                   className="rounded-sm px-1 font-normal lg:hidden"
                 >
                   {tags.length}
                 </Badge>
                 <div className="hidden space-x-1 lg:flex">
-                  {tags.length > 5 ? (
+                  {tags.length > 13 ? (
                     <Badge
-                      variant="secondary"
+                      variant="outline"
                       className="rounded-sm px-1 font-normal"
                     >
                       {tags.length} selected
@@ -74,11 +72,11 @@ const TagsSelect = ({ tags, append, remove }: Props) => {
                   ) : (
                     tags.map((tag) => (
                       <Badge
-                        variant="secondary"
+                        variant="outline"
                         key={tag}
-                        className="rounded-sm px-1 font-normal w-auto"
+                        className="rounded-sm px-2 w-auto"
                       >
-                        {options.find((opt) => opt.name === tag)?.name}
+                        {options?.find((opt) => opt.name === tag)?.name}
                       </Badge>
                     ))
                   )}
@@ -87,7 +85,7 @@ const TagsSelect = ({ tags, append, remove }: Props) => {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-full p-0" align="start">
+        <PopoverContent  className="w-full p-0" align="start">
           <Command>
             <CommandInput placeholder="Search tags" />
             <CommandList>

@@ -18,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Article, Tag } from "@prisma/client";
-import { deleteArticle } from "../actions/delete";
+import { deleteArticle } from "@/app/articles/actions/delete";
 
 interface Props {
   article: Article & {tags: Tag[]}
@@ -35,7 +35,7 @@ export const ArticleCard = ({ article }: Props) => {
   
   
   return (
-    <div className="border rounded-lg">
+    <div className="border rounded-xl hover:-translate-y-1 transition duration-150 ease-in-out">
       <div className="p-5">
         <div className="flex mb-4 justify-between items-start gap-1">
           <div className="flex gap-1 flex-wrap">
@@ -80,7 +80,7 @@ export const ArticleCard = ({ article }: Props) => {
           </DropdownMenu>
         </div>
         <div className="flex">
-          <h3 className="text-3xl"><Link href={`/articles/${article.slug}`}>{article.title}</Link></h3>
+          <h3 className="text-3xl text-left"><Link href={`/articles/${article.slug}`}>{article.title}</Link></h3>
         </div>
       </div>
     </div>

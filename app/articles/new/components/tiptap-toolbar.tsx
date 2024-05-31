@@ -1,6 +1,8 @@
 "use client";
 
 import { type Editor } from "@tiptap/react";
+import { Skeleton } from "@/components/ui/skeleton"
+
 import {
   Bold,
   Strikethrough,
@@ -23,7 +25,7 @@ type Props = {
 
 const Toolbar = ({ editor }: Props) => {
   if (!editor) {
-    return null;
+    return <Skeleton className="h-[225px] w-full rounded-xl" />;
   }
 
   return (
