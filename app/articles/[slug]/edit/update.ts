@@ -18,10 +18,10 @@ export async function update(id: string, data: any) {
       title,
       slug: slugify(title),
       tags: {
-        connectOrCreate: tags.map((tag: string)=> {
+        set: [],
+        connect: tags.map((tag: string)=> {
           return {
-            where: {name: tag},
-            create: {name: tag, slug: slugify(tag)}
+            name: tag,
           }
         })
       }
