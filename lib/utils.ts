@@ -15,3 +15,13 @@ export function slugify(str: string) {
     .replace(/\s+/g, '-') // replace spaces with hyphens
     .replace(/-+/g, '-'); // remove consecutive hyphens
 }
+
+export const replacePwithBr = (html: string) => {
+  // Regular expression to match empty <p> tags
+  const emptyPPattern = /<p\s*[^>]*>\s*<\/p>/g;
+
+  // Replace all matches with <br>
+  const updatedHtml = html.replace(emptyPPattern, '<br>');
+
+  return updatedHtml;
+} 

@@ -1,3 +1,4 @@
+import { merry400, merry300 } from "@/app/fonts"
 import prismadb from "@/lib/prisma"
 import { notFound } from 'next/navigation'
 
@@ -27,8 +28,8 @@ export default async function Article({
           {article?.title}
         </h1>
       </div>
-      <div className="mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div dangerouslySetInnerHTML={{
+      <div className="mt-8 mx-auto max-w-5xl p-6 sm:px-6 lg:p-8">
+        <div className={`${merry300.variable} font-sans3 text-lg tracking-wide`} dangerouslySetInnerHTML={{
             __html: `${article?.body}`
         }} />
       </div>

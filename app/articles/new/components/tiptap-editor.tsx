@@ -8,7 +8,8 @@ import BulletList from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Blockquote from '@tiptap/extension-blockquote'
 import ListItem from '@tiptap/extension-list-item'
-import Placeholder from '@tiptap/extension-placeholder'
+import HardBreak from '@tiptap/extension-hard-break'
+import HorizontalRule from '@tiptap/extension-horizontal-rule'
 
 import Toolbar from "./tiptap-toolbar";
 
@@ -18,6 +19,8 @@ interface Props {
 }
 
 import { mergeAttributes } from '@tiptap/core'
+import { merry300 } from "@/app/fonts";
+import { replacePwithBr } from "@/lib/utils";
 
 type Levels = 1 | 2 | 3
 
@@ -29,11 +32,18 @@ const classes: Record<Levels, string> = {
 
 const Tiptap = ({ onChange, content }: Props) => {
   const handleChange = (richText: string) => {
-    onChange(richText);
+    onChange(replacePwithBr(richText));
   };
   const editor = useEditor({
     extensions: [
-      StarterKit.configure(),
+      StarterKit.configure({
+        paragraph: {
+          HTMLAttributes: {
+            class: 'mb-1',
+          }
+        },
+        
+      }),
       Heading.configure({
         levels: [1, 2, 3, 4]
       }).extend({
@@ -67,19 +77,18 @@ const Tiptap = ({ onChange, content }: Props) => {
         },
       }),
       ListItem,
-      Placeholder.configure({
-        placeholder: 'Write something...',
-        emptyNodeClass: 'float-left text-muted-foreground h-0 pointer-events-none before:content-[attr(data-placeholder)]',
-      }),
+      HorizontalRule,
+      HardBreak,
     ],
     editorProps: {
       attributes: {
         class:
-          "min-h-[350px] border border-input bg-transparent px-4 py-2 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          `${merry300.variable} font-sans3 text-md min-h-[350px] border border-input bg-transparent px-4 py-2 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50`,
       },
     },
     content,
     onUpdate: ({ editor }) => {
+      console.log(editor.getHTML())
       if(editor.getHTML() === "<p></p>") {
         handleChange('');
       } else

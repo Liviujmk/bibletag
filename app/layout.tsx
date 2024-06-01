@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Lexend } from "next/font/google";
 
-import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 
 import { Navbar } from "@/components/shared/navbar/navbar";
+import { lexend } from "@/app/fonts";
 
-const font = Lexend({subsets: ["latin"]});
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "BibleTag - Exploring the Scriptures",
@@ -20,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={lexend.className}>
         <Navbar />
         <main className="relative">
           {children}

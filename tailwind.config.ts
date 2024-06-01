@@ -18,6 +18,11 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans4: ['var(--font-merry4)'],
+        sans3: ['var(--font-merry3)'],
+        mono: ['var(--font-lexend)']
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
