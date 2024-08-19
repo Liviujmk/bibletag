@@ -19,8 +19,8 @@ export default async function Tags() {
         </p>
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 text-center">
-        <div className="mx-auto max-w-7xl py-16">
-          <div className="flex flex-wrap gap-5 p-2 justify-center">
+        <div className="mx-auto max-w-7xl py-8">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-5 p-2 justify-center">
             {
               tags.map((tag: Tag) => (<TagCard tag={tag} key={tag.id} />))
             }

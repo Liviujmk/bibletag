@@ -5,8 +5,12 @@ import { Plus, BarChart } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { MobileNavbar } from "@/components/shared/navbar/mobile-navbar"
+import { cn } from "@/lib/utils"
+import { usePathname } from "next/navigation"
+import { linkActiveCheck } from "./links"
 
 export const Navbar = () => {
+  const pathname = usePathname()
   return (
     <div className="sticky top-0 z-40 border-b bg-white">
       <div className="relative flex justify-between h-16 mx-auto lg:container lg:px-16 xl:px-20">
@@ -23,13 +27,13 @@ export const Navbar = () => {
             <nav className="relative z-10 flex-1 items-center justify-center hidden pl-8 sm:space-x-4 lg:flex h-16">
               <ul className="group flex flex-1 list-none items-center justify-center">
                 <li className="font-medium">
-                  <Link href="/" className="group/menu-item flex items-center text-md hover:text-blue-600 select-none gap-3 rounded-md p-2 leading-none no-underline outline-none focus-visible:ring-2 focus-visible:ring-foreground-lighter group-hover:bg-transparent text-foreground focus-visible:text-brand-link transition-all duration-200">Home</Link>
+                  <Link href="/" className={linkActiveCheck(pathname, '/')}>Home</Link>
                 </li>
                 <li className="font-medium">
-                  <Link href="/articles" className="group/menu-item flex items-center text-md hover:text-blue-600 select-none gap-3 rounded-md p-2 leading-none no-underline outline-none focus-visible:ring-2 focus-visible:ring-foreground-lighter group-hover:bg-transparent text-foreground focus-visible:text-brand-link transition-all duration-200">Articles</Link>
+                  <Link href="/articles" className={linkActiveCheck(pathname, 'articles')}>Articles</Link>
                 </li>
                 <li className="font-medium">
-                  <Link href="/tags" className="group/menu-item flex items-center text-md hover:text-blue-600 select-none gap-3 rounded-md p-2 leading-none no-underline outline-none focus-visible:ring-2 focus-visible:ring-foreground-lighter group-hover:bg-transparent text-foreground focus-visible:text-brand-link transition-all duration-200">Tags</Link>
+                  <Link href="/tags" className={linkActiveCheck(pathname, 'tags')}>Tags</Link>
                 </li>
                 <li className="ml-5 font-medium flex gap-2">
                   <Link href="/articles/new">
