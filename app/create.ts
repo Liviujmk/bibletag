@@ -7,7 +7,7 @@ import prismadb from "@/lib/prisma"
 import { slugify } from "@/lib/utils"
  
 export async function create(data: any) {
-  console.log(data)
+  
   const {body, title, tags} = data
   await prismadb.article.create({
     data: {

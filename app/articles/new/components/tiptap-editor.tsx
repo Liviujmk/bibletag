@@ -19,7 +19,7 @@ interface Props {
 }
 
 import { mergeAttributes } from '@tiptap/core'
-import { merry300 } from "@/app/fonts";
+import { lato, merry300 } from "@/app/fonts";
 import { replacePwithBr } from "@/lib/utils";
 
 type Levels = 1 | 2 | 3
@@ -39,7 +39,7 @@ const Tiptap = ({ onChange, content }: Props) => {
       StarterKit.configure({
         paragraph: {
           HTMLAttributes: {
-            class: 'mb-1',
+            class: `mb-6 ${merry300.className} text-[#333] text-lg tracking-normal leading-[180%]`,
           }
         },
         
@@ -54,7 +54,7 @@ const Tiptap = ({ onChange, content }: Props) => {
           return [
             `h${level}`,
             mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-              class: `${classes[level]}`,
+              class: `${classes[level]} mt-9 mb-4 ${lato.className} tracking-normal leading-[180%]`,
             }),
             0,
           ]
@@ -63,17 +63,17 @@ const Tiptap = ({ onChange, content }: Props) => {
       Underline,
       BulletList.configure({
         HTMLAttributes: {
-          class: 'ml-4 list-disc w-auto',
+          class: 'mb-6 ml-4 list-disc w-auto',
         },
       }),
       OrderedList.configure({
         HTMLAttributes: {
-          class: 'ml-4 list-decimal w-auto',
+          class: `mb-6 ml-4 list-decimal w-auto`,
         },
       }),
       Blockquote.configure({
         HTMLAttributes: {
-          class: 'pl-3 border-l-2 border-slate-200',
+          class: 'mb-6 pl-3 border-l-4 border-slate-600 italic',
         },
       }),
       ListItem,
@@ -88,7 +88,6 @@ const Tiptap = ({ onChange, content }: Props) => {
     },
     content,
     onUpdate: ({ editor }) => {
-      console.log(editor.getHTML())
       if(editor.getHTML() === "<p></p>") {
         handleChange('');
       } else

@@ -7,7 +7,7 @@ import prismadb from "@/lib/prisma"
 import { slugify } from "@/lib/utils"
  
 export async function update(id: string, data: any) {
-  console.log(data)
+  
   const {body, title, tags} = data
   await prismadb.article.update({
     where: {

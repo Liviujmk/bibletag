@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner"
 
 import { Navbar } from "@/components/shared/navbar/navbar";
-import { lexend } from "@/app/fonts";
+import { lato } from "@/app/fonts";
 
 import "./globals.css";
 
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={lexend.className}>
+      <body className={lato.className}>
         <Navbar />
         <main className="relative">
           {children}
